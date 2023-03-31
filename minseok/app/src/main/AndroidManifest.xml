@@ -16,6 +16,27 @@
         android:theme="@style/Theme.MocoApplication"
         tools:targetApi="31">
         <activity
+            android:name=".AddMocoGroup2ndActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".TestActivity2"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".TestActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".RegistrationActivity"
             android:exported="false">
             <meta-data
@@ -43,7 +64,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddMocoGroupActivity"
+            android:name=".AddMocoGroupFstActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
