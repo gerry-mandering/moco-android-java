@@ -75,6 +75,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/idTVHeadCnt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosans_bold"
@@ -95,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:max="40"
                 android:padding="10dp"
                 android:progressBackgroundTint="@color/grey"
                 android:progressTint="@color/orange"
@@ -142,11 +144,12 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/idTVDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/notosans_bold"
-                    android:text="2023/03/31"
+                    android:text="0000/00/00"
                     android:textAlignment="center"
                     android:textColor="@color/grey"
                     android:textSize="20sp">
@@ -178,11 +181,12 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/idTVTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/notosans_bold"
-                    android:text="20 : 10"
+                    android:text="00 : 00 AM"
                     android:textAlignment="center"
                     android:textColor="@color/grey"
                     android:textSize="20sp">
@@ -224,6 +228,7 @@
             </TextView>
 
             <LinearLayout
+                android:id="@+id/idLLSelectLoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -232,6 +237,7 @@
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/idTVSelectLoc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -255,6 +261,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/idTVLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -284,14 +291,5 @@
             android:textSize="23sp" />
 
     </LinearLayout>
-
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingTop="10dp"
-        android:visibility="gone">
-
-    </DatePicker>
 
 </RelativeLayout>
