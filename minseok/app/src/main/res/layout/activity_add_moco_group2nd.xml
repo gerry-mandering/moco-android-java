@@ -32,7 +32,7 @@
             android:fontFamily="@font/notosans_bold"
             android:includeFontPadding="false"
             android:paddingLeft="10dp"
-            android:text="모임 등록"
+            android:text="모임 만들기"
             android:textColor="@color/black"
             android:textSize="35sp" />
 
@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:weightSum="2">
 
                 <TextView
@@ -270,7 +270,7 @@
                 android:text="경기 안양시 만안구 성결대학로 53"
                 android:textColor="@color/grey"
                 android:textSize="18sp"
-                android:visibility="visible">
+                android:visibility="gone">
 
             </TextView>
 

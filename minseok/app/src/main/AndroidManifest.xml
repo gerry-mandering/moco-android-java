@@ -16,6 +16,13 @@
         android:theme="@style/Theme.MocoApplication"
         tools:targetApi="31">
         <activity
+            android:name=".GetMapLocationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddMocoGroup2ndActivity"
             android:exported="false">
             <meta-data
