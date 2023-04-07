@@ -57,6 +57,7 @@
             android:padding="5dp"
             android:textColorHint="@color/grey"
             app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:hintTextColor="@color/grey">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -90,16 +91,19 @@
             android:padding="5dp"
             android:textColorHint="@color/grey"
             app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:hintTextColor="@color/grey">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idEdtContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/notosans_bold"
+                android:gravity="top"
                 android:importantForAutofill="no"
                 android:includeFontPadding="false"
                 android:inputType="textMultiLine"
+                android:scrollbars="vertical"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>

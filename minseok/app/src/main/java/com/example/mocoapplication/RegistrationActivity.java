@@ -60,8 +60,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 String userName = userNameEdt.getText().toString();
 
                 if (!pwd.equals(cnfPwd)) {
+                    loadingPB.setVisibility(View.GONE);
                     Toast.makeText(RegistrationActivity.this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(email) && TextUtils.isEmpty(pwd) && TextUtils.isEmpty(cnfPwd) && TextUtils.isEmpty(userName)) {
+                    loadingPB.setVisibility(View.GONE);
                     Toast.makeText(RegistrationActivity.this, "모든 항목을 입력해주십시오", Toast.LENGTH_SHORT).show();
                 } else {
                     mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

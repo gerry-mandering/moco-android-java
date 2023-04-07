@@ -12,6 +12,9 @@ public class GroupParcel implements Parcelable {
     private String location;
     private String groupID;
 
+    public GroupParcel() {
+    }
+
     public GroupParcel(String title, String content, int headCnt, String date, String time, String location, String groupID) {
         this.title = title;
         this.content = content;
@@ -30,6 +33,62 @@ public class GroupParcel implements Parcelable {
         time = in.readString();
         location = in.readString();
         groupID = in.readString();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getHeadCnt() {
+        return headCnt;
+    }
+
+    public void setHeadCnt(int headCnt) {
+        this.headCnt = headCnt;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
     }
 
     public static final Creator<GroupParcel> CREATOR = new Creator<GroupParcel>() {

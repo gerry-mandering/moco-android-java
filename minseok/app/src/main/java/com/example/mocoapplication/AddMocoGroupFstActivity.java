@@ -38,6 +38,7 @@ public class AddMocoGroupFstActivity extends AppCompatActivity {
                 String content = contentEdt.getText().toString();
 
                 if (TextUtils.isEmpty(title) && TextUtils.isEmpty(content)) {
+                    loadingPB.setVisibility(View.GONE);
                     Toast.makeText(AddMocoGroupFstActivity.this, "모든 항목을 입력해주십시오", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
@@ -45,6 +46,7 @@ public class AddMocoGroupFstActivity extends AppCompatActivity {
                     intent.putExtra("title", title);
                     intent.putExtra("content", content);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

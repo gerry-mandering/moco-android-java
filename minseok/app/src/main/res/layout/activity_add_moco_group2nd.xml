@@ -56,10 +56,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:weightSum="2"
-                android:layout_height="wrap_content">
+                android:layout_weight="1"
+                android:weightSum="2">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -78,14 +78,14 @@
                     android:id="@+id/idTVHeadCnt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/notosans_bold"
                     android:includeFontPadding="false"
                     android:paddingHorizontal="15dp"
+                    android:text="2 / 6"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/orange"
-                    android:textSize="14sp"
-                    android:text="2 / 6"
-                    android:layout_weight="1">
+                    android:textSize="14sp">
 
                 </TextView>
 
@@ -243,8 +243,8 @@
                     android:layout_weight="1"
                     android:drawableEnd="@drawable/ic_baseline_add_location_alt_24"
                     android:fontFamily="@font/notosans_bold"
-                    android:text="지정하기"
                     android:paddingHorizontal="30dp"
+                    android:text="지정하기"
                     android:textAlignment="center"
                     android:textColor="@color/orange"
                     android:textSize="18sp">

@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pwd = pwdEdt.getText().toString();
 
                 if (TextUtils.isEmpty(email) && TextUtils.isEmpty(pwd)) {
+                    loadingPB.setVisibility(View.GONE);
                     Toast.makeText(LoginActivity.this, "모든 항목을 입력해주십시오", Toast.LENGTH_SHORT).show();
                     return;
                 } else {

@@ -13,6 +13,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,16 +35,22 @@ import java.util.Date;
 
 public class AddMocoGroup2ndActivity extends AppCompatActivity {
 
+    private static final String TAG = "AddMocoGroup2ndActivity";
+
     private TextView headCntTV, dateTV, timeTV, selectLocTV, locationTV;
     private SeekBar headCntSB;
     private LinearLayout selectLocLL;
     private Button postBtn;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private DatabaseReference postCountDatabaseReference;
 
-    private static Long count;
+    private static long count;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     private SimpleDateFormat timeFormat = new SimpleDateFormat("H:mm a");
+
+    private Long postCount;
+    private String groupID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,7 @@ public class AddMocoGroup2ndActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Groups");
+        postCountDatabaseReference = firebaseDatabase.getReference("PostCount");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -138,26 +146,43 @@ public class AddMocoGroup2ndActivity extends AppCompatActivity {
         postBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addMocoGroupFstIntent = getIntent();
 
-                String title = addMocoGroupFstIntent.getStringExtra("title");
-                String content = addMocoGroupFstIntent.getStringExtra("content");
-                int headCnt = (headCntSB.getProgress() + 20) / 10;
-                String date = dateTV.getText().toString();
-                String time = timeTV.getText().toString();
-                String location = locationTV.getText().toString();
-                String groupID = Long.toString(++count);
-
-                GroupParcel groupParcel = new GroupParcel(title, content, headCnt, date, time, location, groupID);
-
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                postCountDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        databaseReference.child(groupID).setValue(groupParcel);
-                        Toast.makeText(AddMocoGroup2ndActivity.this, "모임이 등록되었습니다", Toast.LENGTH_SHORT).show();
+                        Intent addMocoGroupFstIntent = getIntent();
 
-                        Intent intent = new Intent(AddMocoGroup2ndActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        String title = addMocoGroupFstIntent.getStringExtra("title");
+                        String content = addMocoGroupFstIntent.getStringExtra("content");
+                        int headCnt = (headCntSB.getProgress() + 20) / 10;
+                        String date = dateTV.getText().toString();
+                        String time = timeTV.getText().toString();
+                        String location = locationTV.getText().toString();
+
+                        postCount = snapshot.getValue(Long.class);
+                        System.out.println("postCount = " + postCount);
+                        groupID = Long.toString(postCount);
+                        System.out.println("groupID = " + groupID);
+
+                        GroupParcel groupParcel = new GroupParcel(title, content, headCnt, date, time, location, groupID);
+
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                databaseReference.child(groupID).setValue(groupParcel);
+                                postCountDatabaseReference.setValue(postCount + 1);
+                                Toast.makeText(AddMocoGroup2ndActivity.this, "모임이 등록되었습니다", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(AddMocoGroup2ndActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(AddMocoGroup2ndActivity.this, "오류가 발생 했습니다(" + error.toString() + ")", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override
@@ -165,9 +190,58 @@ public class AddMocoGroup2ndActivity extends AppCompatActivity {
                         Toast.makeText(AddMocoGroup2ndActivity.this, "오류가 발생 했습니다(" + error.toString() + ")", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
+
+
+//        postBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent addMocoGroupFstIntent = getIntent();
+//
+//                String title = addMocoGroupFstIntent.getStringExtra("title");
+//                String content = addMocoGroupFstIntent.getStringExtra("content");
+//                int headCnt = (headCntSB.getProgress() + 20) / 10;
+//                String date = dateTV.getText().toString();
+//                String time = timeTV.getText().toString();
+//                String location = locationTV.getText().toString();
+//
+//                postCountDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        postCount = snapshot.getValue(Long.class);
+//                        System.out.println("postCount = " + postCount);
+//                        groupID =  Long.toString(postCount);
+//                        System.out.println("groupID = " + groupID);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//
+//                GroupParcel groupParcel = new GroupParcel(title, content, headCnt, date, time, location, groupID);
+//
+//                databaseReference.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        databaseReference.child(groupID).setValue(groupParcel);
+//                        postCountDatabaseReference.setValue(postCount + 1);
+//                        Toast.makeText(AddMocoGroup2ndActivity.this, "모임이 등록되었습니다", Toast.LENGTH_SHORT).show();
+//
+//                        Intent intent = new Intent(AddMocoGroup2ndActivity.this, MainActivity.class);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                        Toast.makeText(AddMocoGroup2ndActivity.this, "오류가 발생 했습니다(" + error.toString() + ")", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//            }
+//        });
     }
 
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
