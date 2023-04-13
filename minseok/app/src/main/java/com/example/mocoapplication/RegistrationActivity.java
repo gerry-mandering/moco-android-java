@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -17,9 +19,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    private final static String TAG = "RegistrationActivity";
     private TextInputEditText emailEdt, pwdEdt, cnfPwdEdt, userNameEdt;
     private Button registerBtn;
     private TextView loginTV;
@@ -71,6 +76,22 @@ public class RegistrationActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 loadingPB.setVisibility(View.GONE);
+
+                                FirebaseUser user = mAuth.getCurrentUser();
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(userName)
+                                        .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                        .build();
+
+                                user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User profile updated.");
+                                        }
+                                    }
+                                });
 
                                 Toast.makeText(RegistrationActivity.this, "회원가입 되었습니다", Toast.LENGTH_SHORT).show();
 
