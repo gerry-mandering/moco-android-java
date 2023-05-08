@@ -3,10 +3,15 @@ package com.example.mocoapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+
 public class GroupParcel implements Parcelable {
     private String title;
     private String content;
-    private int headCnt;
+    private int totalHeadCnt;
+    private int currentHeadCnt;
     private String date;
     private String time;
     private String location;
@@ -15,10 +20,11 @@ public class GroupParcel implements Parcelable {
     public GroupParcel() {
     }
 
-    public GroupParcel(String title, String content, int headCnt, String date, String time, String location, String groupID) {
+    public GroupParcel(String title, String content, int totalHeadCnt, int currentHeadCnt, String date, String time, String location, String groupID) {
         this.title = title;
         this.content = content;
-        this.headCnt = headCnt;
+        this.totalHeadCnt = totalHeadCnt;
+        this.currentHeadCnt = currentHeadCnt;
         this.date = date;
         this.time = time;
         this.location = location;
@@ -28,7 +34,8 @@ public class GroupParcel implements Parcelable {
     protected GroupParcel(Parcel in) {
         title = in.readString();
         content = in.readString();
-        headCnt = in.readInt();
+        totalHeadCnt = in.readInt();
+        currentHeadCnt = in.readInt();
         date = in.readString();
         time = in.readString();
         location = in.readString();
@@ -51,12 +58,20 @@ public class GroupParcel implements Parcelable {
         this.content = content;
     }
 
-    public int getHeadCnt() {
-        return headCnt;
+    public int getTotalHeadCnt() {
+        return totalHeadCnt;
     }
 
-    public void setHeadCnt(int headCnt) {
-        this.headCnt = headCnt;
+    public void setTotalHeadCnt(int totalHeadCnt) {
+        this.totalHeadCnt = totalHeadCnt;
+    }
+
+    public int getCurrentHeadCnt() {
+        return currentHeadCnt;
+    }
+
+    public void setCurrentHeadCnt(int currentHeadCnt) {
+        this.currentHeadCnt = currentHeadCnt;
     }
 
     public String getDate() {
@@ -109,10 +124,11 @@ public class GroupParcel implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeString(title);
         parcel.writeString(content);
-        parcel.writeInt(headCnt);
+        parcel.writeInt(totalHeadCnt);
+        parcel.writeInt(currentHeadCnt);
         parcel.writeString(date);
         parcel.writeString(time);
         parcel.writeString(location);

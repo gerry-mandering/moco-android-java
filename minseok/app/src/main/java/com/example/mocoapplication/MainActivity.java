@@ -126,18 +126,13 @@ public class MainActivity extends AppCompatActivity implements GroupRVAdapter.Gr
 
     @Override
     public void onGroupClick(int position) {
-        displayBottomSheet(groupParcelArrayList.get(position));
+        displayGroupDetail(groupParcelArrayList.get(position));
     }
 
-    private void displayBottomSheet(GroupParcel groupParcel) {
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_dialog, bottomSheetRL);
-        bottomSheetDialog.setContentView(layout);
-        bottomSheetDialog.setCancelable(false);
-        bottomSheetDialog.setCanceledOnTouchOutside(true);
-        bottomSheetDialog.show();
-
-//        TextView groupNameTV = lat
+    private void displayGroupDetail(GroupParcel groupParcel) {
+        Intent intent = new Intent(MainActivity.this, GroupDetailActivity.class);
+        intent.putExtra("group", groupParcel);
+        startActivity(intent);
     }
 
     @Override

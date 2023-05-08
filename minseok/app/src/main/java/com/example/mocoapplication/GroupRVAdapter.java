@@ -43,7 +43,7 @@ public class GroupRVAdapter extends RecyclerView.Adapter<GroupRVAdapter.ViewHold
         holder.contentTV.setText(groupParcel.getContent());
         holder.locationTV.setText(groupParcel.getLocation());
         holder.timeTV.setText(groupParcel.getTime());
-        holder.headCntTV.setText(groupParcel.getHeadCnt() + " / 6");
+        holder.headCntTV.setText(groupParcel.getCurrentHeadCnt() + " / " + groupParcel.getTotalHeadCnt());
 
         setAnimation(holder.itemView, position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +67,7 @@ public class GroupRVAdapter extends RecyclerView.Adapter<GroupRVAdapter.ViewHold
         return groupParcelArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView titleTV, contentTV, locationTV, dateTV, timeTV, headCntTV;
 
