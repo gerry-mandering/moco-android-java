@@ -75,8 +75,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                loadingPB.setVisibility(View.GONE);
-
                                 FirebaseUser user = mAuth.getCurrentUser();
 
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -93,6 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     }
                                 });
 
+                                loadingPB.setVisibility(View.GONE);
                                 Toast.makeText(RegistrationActivity.this, "회원가입 되었습니다", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);

@@ -31,9 +31,9 @@ public class GetMapLocationActivity extends AppCompatActivity implements OnMapRe
         locationTV = findViewById(R.id.idTVLocation);
         submitBtn = findViewById(R.id.idBtnSubmit);
 
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
